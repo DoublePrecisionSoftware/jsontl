@@ -1,0 +1,19 @@
+Process:
+	A transform is defined by a JSON file containing the follwoing data:
+	-	An object with a single property, "jsont", which the properties:
+		-	"version" is a string that defines which version of jsont to use
+		-	"transform" is an array of objects that defines the transform
+			operations to peform
+	
+	A transform has the following structure:
+	-	A "locator" defining which property of the JSON object to perform the
+		transform on.
+		This locator can refer to a single property by using the location "in",
+		or an array using the locator "for"
+	
+Locators:
+	The "in" locator:
+		The "in" locator contains an object.  This object has a single property,
+		the name of which is the name of the associated property in the dataset
+		to be transformed.  The value of this property is an array of transform
+		objects.

@@ -1,0 +1,9 @@
+{
+	"browser": true,
+	"devel": true,
+	"debug": true,
+	"plusplus": false,
+	"regexp": true,
+	"white": true,
+	"undef": true
+}

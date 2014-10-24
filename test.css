@@ -1,0 +1,19 @@
+#msg {
+	font-size: 14pt;
+}
+
+#msg.pass {
+	color: green;
+}
+
+#msg.pass:before {
+	content: 'Passed!';
+}
+
+#msg.fail {
+	color: red;
+}
+
+#msg.fail:before {
+	content: 'Failed!';
+}
