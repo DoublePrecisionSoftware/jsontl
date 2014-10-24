@@ -37,8 +37,7 @@
     result.System.Meta.User === "Bob",
     result.Customers[0].Name === "Jerry",
     result.Customers[0].Addresses[0].Address1 === "321 Code Street",
-    result.Customers[1].Addresses[0].Address1 === "321 Code Street",
-    result.Customers[1].Name === "Roger"
+    result.Customers[1].Addresses[0].Address1 === "321 Code Street"
  ];
 
   var passed = tests.every(function (e) {
@@ -47,7 +46,7 @@
 
   document.getElementById('msg').className = (passed ? "pass" : "fail");
   document.getElementById('result').innerHTML =
-    JSON.stringify(result.Customers[1], undefined, 4);
+    JSON.stringify(result, undefined, 4);
 })();
 
 
@@ -116,24 +115,6 @@ function getTransform() {
                   "when": {
                     "Type": "Work"
                   }
-                }
-              }
-            }
-          },
-          "if": {
-            "and": {
-              "eq": {
-                "Name": "Joe"
-              },
-              "gt": {
-                "Id": 1
-              }
-            },
-            "then": {
-              // ONLY Custom with Id of 2 and name of "Joe"
-              "replace": {
-                "Name": {
-                  "with": "Roger"
                 }
               }
             }

@@ -5,79 +5,7 @@
 var jsont = (function () {
   'use strict';
 
-  var _conditions = (function () {
-    function allTrue(e) {
-      return e;
-    }
 
-    function _if(conds, node) {
-
-      if (node instanceof Array) {
-        return _every(conds, node);
-      }
-
-      var results = [];
-      for (var type in conds) {
-        switch (type) {
-        case "and":
-          results.push(_and(conds.and, node));
-          break;
-        case "or":
-          results.push(_or(conds.or, node));
-          break;
-        }
-      }
-
-
-      return results.every(allTrue);
-    }
-
-    function _eval(conds, node) {
-      function eq(e) {
-        return node[e] === conds[op][e];
-      }
-
-      function gt(e) {
-        return node[e] > conds[op][e];
-      }
-      var results = [];
-      for (var op in conds) {
-        switch (op) {
-        case "eq":
-          results.push(Object.keys(conds[op]).every(eq));
-          break;
-        case "gt":
-          results.push(Object.keys(conds[op]).every(gt));
-          break;
-        }
-      }
-      return results;
-    }
-
-    function _every(conds, node) {
-      var i = -1,
-        len = node.length;
-      var results = [];
-      while (++i < len) {
-        results.push(_if(conds, node[i]));
-      }
-      return results.every(allTrue);
-    }
-
-    function _and(cond, node) {
-      var results = _eval(cond, node);
-      return results.every(allTrue);
-    }
-
-    function _or(cond, node) {
-      var results = _eval(cond, node);
-      return results.some(allTrue);
-    }
-
-    return {
-      if :_if
-    };
-  })();
 
   var _transforms = (function () {
     function replace(node, trans, key) {
@@ -139,11 +67,6 @@ var jsont = (function () {
     function _in(data, transform) {
       for (var dataKey in transform) {
         for (var op in transform[dataKey]) {
-          if (_conditions[op]) {
-            if (!_conditions[op](transform[dataKey][op], data[dataKey])) {
-              continue;
-            }
-          }
           if (_locators[op]) {
             _locators[op](data[dataKey], transform[dataKey][op]);
           } else if (_transforms[op]) {
@@ -161,12 +84,6 @@ var jsont = (function () {
           var i = -1,
             dataLen = data.length;
           while (++i < dataLen) {
-
-            if (_conditions[op]) {
-              if (!_conditions[op](transform[dataKey][op], data[i][dataKey])) {
-                continue;
-              }
-            }
             if (_locators[op]) {
               _locators[op](data[i][dataKey], transform[dataKey][op]);
             } else if (_transforms[op]) {
