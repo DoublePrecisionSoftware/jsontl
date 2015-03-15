@@ -41,46 +41,6 @@ var jsont = (function () {
       }
     }
 
-    // replace a value in the object provided with the supplied value
-//    var replace = function (data, transform, key) {
-//      if (typeof data[key] === "object") {
-//        // data[condition] is an object, so step through the property names
-//        for (var prop in transform) {
-//          // if there's a `when`, check first
-//          if (transform[prop].hasOwnProperty('when')) {
-//            // if any of the values don't match, don't replace
-//            for (var cond in transform[prop].when) {
-//              if (data[key][cond] !== transform[prop].when[cond]) {
-//                break;
-//              }
-//              // replce the value
-//              data[key][prop] = transform[prop].with;
-//            }
-//          } else {
-//            // no `when`, just replace
-//            data[key][prop] = transform[prop].with;
-//          }
-//        }
-//      } else {
-//        // data[condition] is scalar value, so we expect only a `with` and/or `when`
-//        if (transform.hasOwnProperty('when')) {
-//          // for each condition...
-//          for (var cond in transform.when) {
-//            // ensure the condition is met
-//            if (data[key].when[cond] !== transform.when[cond]) {
-//              // otherwise, bail and don't modify anything
-//              break;
-//            }
-//            // replace the value
-//            data[key] = transform.with;
-//          }
-//        } else {
-//          // replace the value
-//          data[key] = transform.with;
-//        }
-//      }
-//    }
-
     // add the specified data to the object provided
     var extend = function (data, trans, key) {
       if (typeof data[key] !== "object") {

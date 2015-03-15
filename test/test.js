@@ -29,14 +29,3 @@ describe('Tranform', function () {
 		assert.equal(data.Value, "Two");
 	});
 });
-
-//  var tests = [
-//    result.Value === "Two",
-//    result.Person.FirstName === "Bob",
-//    result.Person.MiddleInitial === "X",
-//    result.System.Meta.OS === "Windows",
-//    result.System.Meta.User === "Bob",
-//    result.Customers[0].Name === "Jerry",
-//    result.Customers[0].Addresses[0].Address1 === "321 Code Street",
-//    result.Customers[1].Addresses[0].Address1 === "321 Code Street"
-// ];
