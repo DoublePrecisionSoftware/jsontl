@@ -1,4 +1,4 @@
-{
+module.exports = {
 	"Value": "One",
 	"Person": {
 		"FirstName": "Jerry",
@@ -45,4 +45,4 @@
 				]
 			}
 		]
-}
+};

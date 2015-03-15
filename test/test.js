@@ -1,183 +1,42 @@
-/*global jsont */
+/* Unit tests for jsont */
 
-(function () {
+var assert = require("assert");
 
-  var xhr = (function () {
-    var request = new XMLHttpRequest();
-    return function (method, url, callback) {
-      request.onreadystatechange = function () {
-        if (request.readyState === 4) {
-          callback(request.responseText, request.status, request.statusText);
-        }
-      };
-      request.open(method, url);
-      request.send();
-    };
-  })(xhr || {});
+var data = require('./data.js');
+var transform = require('./transform.js');
 
-  //	xhr("GET", "/transform.jsont", function (transform) {
-  //
-  //		xhr("GET", "/data.json", function (data) {
-  //
-  //			var result = jsont.transform(JSON.parse(data), JSON.parse(transform));
-  //
-  //			document.getElementById('result').innerHTML = JSON.stringify(result, undefined, 4);
-  //		});
-  //	});
+var jsont = require('../jsont.js');
 
-  var transform = getTransform();
-  var data = getData();
-  var result = jsont.transform(data, transform);
+jsont.transform(data, transform);
 
-  var tests = [
-    result.Value === "Two",
-    result.Person.FirstName === "Bob",
-    result.Person.MiddleInitial === "X",
-    result.System.Meta.OS === "Windows",
-    result.System.Meta.User === "Bob",
-    result.Customers[0].Name === "Jerry",
-    result.Customers[0].Addresses[0].Address1 === "321 Code Street",
-    result.Customers[1].Addresses[0].Address1 === "321 Code Street"
- ];
+describe('Tranform', function () {
+	it('Sets Value to "Two"', function() {
+		assert.equal(data.Value, "Two");
+	});
+	it('Sets Person.FirstName to "Bob"', function() {
+		assert.equal(data.Person.FirstName, "Bob");
+	});
+	it('Adds Person.MiddleInitial and sets it to "X"', function() {
+		assert.equal(data.Person.MiddleInitial, "X");
+	});
+	it('Sets System.Meta.OS to "Windows"', function() {
+		assert.equal(data.System.Meta.OS, "Windows");
+	});
+	it('Adds System.Meta.User and sets it to "Bob"', function() {
+		assert.equal(data.System.Meta.User, "Bob");
+	});
+	it('Sets all Customers obect\'s Addresses[0].Address1 to "321 Code Street"', function() {
+		assert.equal(data.Value, "Two");
+	});
+});
 
-  var passed = tests.every(function (e) {
-    return e;
-  });
-
-  document.getElementById('msg').className = (passed ? "pass" : "fail");
-  document.getElementById('result').innerHTML =
-    JSON.stringify(result, undefined, 4);
-})();
-
-
-
-function getTransform() {
-  return {
-    "jsont": {
-      "version": "0.1",
-      "transform": {
-        "Value": {
-          "replace": {
-            "with": "Two"
-          }
-        },
-        "Person": {
-          "replace": {
-            "FirstName": {
-              "with": "Bob",
-              "when": {
-                "LastName": "Smith"
-              }
-            },
-            "LastName": {
-              "with": "Jones"
-            }
-          },
-          "extend": {
-            "MiddleInitial": "X"
-          }
-        },
-        "System": {
-          "in": {
-            "Meta": {
-              "replace": {
-                "OS": {
-                  "with": "Windows"
-                }
-              },
-              "extend": {
-                "User": "Bob"
-              }
-            }
-
-          },
-          "replace": {
-            "Name": {
-              "with": "MySytem2"
-            }
-          }
-        },
-        "Customers": {
-          "replace": {
-            "Name": {
-              "with": "Jerry",
-              "when": {
-                "Id": 1
-              }
-            }
-          },
-          "for": {
-            // ALL Addresses with Type of "Work"
-            "Addresses": {
-              "replace": {
-                "Address1": {
-                  "with": "321 Code Street",
-                  "when": {
-                    "Type": "Work"
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  };
-}
-
-function getData() {
-  return {
-    "Value": "One",
-    "Person": {
-      "FirstName": "Jerry",
-      "LastName": "Smith"
-    },
-    "System": {
-      "Meta": {
-        "OS": "OSX"
-      },
-      "Name": "MySystem"
-    },
-    "Customers": [
-      {
-        "Id": 1,
-        "Name": "Bob",
-        "Addresses": [
-          {
-            "Type": "Work",
-            "Address1": "123 Code Street",
-            "City": "Place",
-            "State": "ST",
-            "Phone": {
-              "Work": "555-1234"
-            }
-    }, {
-            "Type": "Home",
-            "Address1": "123 Home Street",
-            "City": "Place",
-            "State": "ST",
-            "Phone": {
-              "Work": "555-1234"
-            }
-    }
-   ]
-  }, {
-        "Id": 2,
-        "Name": "Joe",
-        "Addresses": [
-          {
-            "Type": "Work",
-            "Address1": "123 Code Street",
-            "City": "Place",
-            "State": "ST"
-    }, {
-            "Type": "Home",
-            "Address1": "123 Home Street",
-            "City": "Place",
-            "State": "ST"
-     }
-    ]
-   }
-  ]
-  };
-}
+//  var tests = [
+//    result.Value === "Two",
+//    result.Person.FirstName === "Bob",
+//    result.Person.MiddleInitial === "X",
+//    result.System.Meta.OS === "Windows",
+//    result.System.Meta.User === "Bob",
+//    result.Customers[0].Name === "Jerry",
+//    result.Customers[0].Addresses[0].Address1 === "321 Code Street",
+//    result.Customers[1].Addresses[0].Address1 === "321 Code Street"
+// ];

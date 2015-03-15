@@ -1,4 +1,7 @@
-{
+var msg = document.getElementById('msg');
+var resultText = document.getElementById('result');
+
+var transform = {
   "jsont": {
     "version": "0.1",
     "transform": {
@@ -7,7 +10,7 @@
           "replace": {
             "with": "Two"
           }
-      }
+        }
      ],
       "Person": [
         {
@@ -22,12 +25,12 @@
               "with": "Jones"
             }
           }
-    }, {
+        }, {
           "extend": {
             "MiddleInitial": "X"
           }
-    }
-   ],
+        }
+      ],
       "System": [
         {
           "in": {
@@ -41,17 +44,17 @@
                 "extend": {
                   "User": "Bob"
                 }
-       }
-      ]
+              }
+            ]
           }
-    }, {
+        }, {
           "replace": {
             "Name": {
               "with": "MySytem2"
             }
           }
-    }
-   ],
+        }
+      ],
       "Customers": [
         {
           "replace": {
@@ -75,11 +78,68 @@
                     }
                   }
                 }
-       }
-      ]
+              }
+            ]
           }
-    }
-   ]
+        }
+      ]
     }
   }
-}
+};
+
+
+var data = {
+  "Value": "One",
+  "Person": {
+    "FirstName": "Jerry",
+    "LastName": "Smith"
+  },
+  "System": {
+    "Meta": {
+      "OS": "OSX"
+    },
+    "Name": "MySystem"
+  },
+  "Customers": [
+    {
+      "Id": 1,
+      "Name": "Bob",
+      "Addresses": [
+        {
+          "Type": "Work",
+          "Address1": "123 Code Street",
+          "City": "Place",
+          "State": "ST"
+    }, {
+          "Type": "Home",
+          "Address1": "123 Home Street",
+          "City": "Place",
+          "State": "ST"
+    }
+   ]
+  }, {
+      "Id": 2,
+      "Name": "Joe",
+      "Addresses": [
+        {
+          "Type": "Work",
+          "Address1": "123 Code Street",
+          "City": "Place",
+          "State": "ST"
+    }, {
+          "Type": "Home",
+          "Address1": "123 Home Street",
+          "City": "Place",
+          "State": "ST"
+     }
+    ]
+   }
+  ]
+};
+
+
+
+var result = jsont.transform(data, transform);
+
+
+resultText.innerText = JSON.stringify(result, undefined, 4);
