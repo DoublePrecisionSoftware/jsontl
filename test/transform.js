@@ -1,5 +1,5 @@
 module.exports = {
-	"jsont": {
+	"jsontl": {
 		"version": "0.1",
 		"transform": {
 			"Value": [

@@ -2,7 +2,7 @@ var msg = document.getElementById('msg');
 var resultText = document.getElementById('result');
 
 var transform = {
-  "jsont": {
+  "jsontl": {
     "version": "0.1",
     "transform": {
       "Value": [
@@ -139,7 +139,7 @@ var data = {
 
 
 
-var result = jsont.transform(data, transform);
+var result = jsontl.transform(data, transform);
 
 
 resultText.innerText = JSON.stringify(result, undefined, 4);

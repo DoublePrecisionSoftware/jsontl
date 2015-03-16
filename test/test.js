@@ -5,11 +5,11 @@ var assert = require("assert");
 var data = require('./data.js');
 var transform = require('./transform.js');
 
-var jsont = require('../jsont.js');
+var jsont = require('../jsontl.js');
 
 jsont.transform(data, transform);
 
-describe('Tranform', function () {
+describe('Transform', function () {
 	it('Sets Value to "Two"', function() {
 		assert.equal(data.Value, "Two");
 	});

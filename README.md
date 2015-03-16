@@ -1,11 +1,10 @@
-jsont
+JSON Trasnformation Language
 =====
 
-jsont is a library inteded to allow tranformation of JSON data using a
-JSON-based transformation language.
+jsontl is a library inteded to allow tranformation of JSON data using a JSON-based transformation language.
 
 ##Format
-The format for jsont transforms (`.jsont` files) is as follows:
+The format for jsontl transforms (`.jsontl` files) is as follows:
 
 ```json
 {

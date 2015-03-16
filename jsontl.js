@@ -1,4 +1,4 @@
-var jsont = (function () {
+var jsontl = (function () {
 
   var transforms = (function () {
 
@@ -91,11 +91,8 @@ var jsont = (function () {
       return data;
     }
 
-    var _for = function(data, transform) {
-
-    }
-
-    return { in : _in
+    return {
+			in : _in
     };
   })();
 
@@ -109,9 +106,9 @@ var jsont = (function () {
      * @returns {Object} The transformed data
      */
     transform: function (data, transform) {
-      if (typeof transform.jsont !== "undefined") {
-        if (typeof transform.jsont.transform !== "undefined") {
-          return locators.in(data, transform.jsont.transform);
+      if (typeof transform.jsontl !== "undefined") {
+        if (typeof transform.jsontl.transform !== "undefined") {
+          return locators.in(data, transform.jsontl.transform);
         }
       }
       throw Error("Tranform definition invalid");
@@ -121,4 +118,4 @@ var jsont = (function () {
   return lib;
 })();
 
-module.exports = jsont;
+module.exports = jsontl;

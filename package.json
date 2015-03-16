@@ -1,21 +1,21 @@
 {
-  "name": "jsont",
+  "name": "jsontl",
   "version": "0.1.0",
-  "description": "JSON transformation library",
-  "main": "jsont.js",
+  "description": "JSON Transformation Language",
+  "main": "jsontl.js",
   "repository": {
     "type": "git",
-    "url": "https://wtfsven:%21%40PAssw02d@github.com/DoublePrecisionSoftware/jsont.git"
+    "url": "https://wtfsven:%21%40PAssw02d@github.com/DoublePrecisionSoftware/jsontl.git"
   },
   "keywords": [
     "json",
     "transform",
-    "jsont"
+    "jsontl"
   ],
   "author": "Stephen Collins <wtfsven@live.com> (http://github.com/wtfsven)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/DoublePrecisionSoftware/jsont/issues"
+    "url": "https://github.com/DoublePrecisionSoftware/jsontl/issues"
   },
-  "homepage": "https://github.com/DoublePrecisionSoftware/jsont"
+  "homepage": "https://github.com/DoublePrecisionSoftware/jsontl"
 }
