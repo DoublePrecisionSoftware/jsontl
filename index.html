@@ -1,9 +1,8 @@
 <!doctype html><html><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="chrome=1"><title>jsontl by DoublePrecisionSoftware</title><link rel="stylesheet" href="stylesheets/styles.css"><link rel="stylesheet" href="stylesheets/pygment_trac.css"><meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"><!--[if lt IE 9]> <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script> <![endif]--></head><body><div class="wrapper"><header><h1>jsontl</h1><p>Transform JSON with JSON</p><p class="view"><a href="https://github.com/DoublePrecisionSoftware/jsontl">View the Project on GitHub <small>DoublePrecisionSoftware/jsontl</small></a></p><ul><li><a href="https://github.com/DoublePrecisionSoftware/jsontl/zipball/master">Download <strong>ZIP File</strong></a></li><li><a href="https://github.com/DoublePrecisionSoftware/jsontl/tarball/master">Download <strong>TAR Ball</strong></a></li><li><a href="https://github.com/DoublePrecisionSoftware/jsontl">View On <strong>GitHub</strong></a></li></ul></header><section><h1 id="a-proposal-for-json-transforms">A Proposal for JSON Transforms</h1>
 <p>As JSON is quickly becoming the standard for both over-the-wire and flat file
 data, there has become a need for utilties for dealing with data of this type.</p>
-<p>Many tools have been created: countless JSON parsing libraries,
-<a href="http://goessner.net/articles/JsonPath/">JSONPath</a>, etc, but none so far have
-addressed the need for <em>transormation</em> of JSON data.</p>
+<p>Many tools have been created: countless JSON parsing libraries, JSONPath, etc,
+but none so far have addressed the need for <em>transormation</em> of JSON data.</p>
 <p>Traditionally, XML has been the standard storage and transfer mechanism for
 complex data, and thus it was necessary for XSLT to become a standard language
 for transforming XML data into various permutaions for consumption outside its
@@ -119,6 +118,8 @@ of infinitely nested objects.</p>
 <p>JSONTL provides a few basic Operations to perform on data.  These include
 <code>replace</code>, which replaces scalar values with the value specified by the <code>with</code>
 parameter, and <code>extend</code>, which adds new key/value pairs to an object.</p>
+<p>Many further Operations are planned, specifically around transforms pertaining
+to <code>Array</code> types, such as <code>push</code>, <code>pop</code>, <code>slice</code>, etc.</p>
 <h4 id="futher-development">Futher Development</h4>
 <p>As of the time of this writing, conditionals for transform operations only have
 access to the properties within the current transformation context.  I have

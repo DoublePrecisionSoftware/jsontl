@@ -3,9 +3,8 @@
 As JSON is quickly becoming the standard for both over-the-wire and flat file
 data, there has become a need for utilties for dealing with data of this type.
 
-Many tools have been created: countless JSON parsing libraries, 
-[JSONPath](http://goessner.net/articles/JsonPath/), etc, but none so far have
-addressed the need for *transormation* of JSON data.
+Many tools have been created: countless JSON parsing libraries, JSONPath, etc, 
+but none so far have addressed the need for *transormation* of JSON data.
 
 Traditionally, XML has been the standard storage and transfer mechanism for
 complex data, and thus it was necessary for XSLT to become a standard language
@@ -147,6 +146,9 @@ of infinitely nested objects.
 JSONTL provides a few basic Operations to perform on data.  These include 
 `replace`, which replaces scalar values with the value specified by the `with`
 parameter, and `extend`, which adds new key/value pairs to an object.
+
+Many further Operations are planned, specifically around transforms pertaining 
+to `Array` types, such as `push`, `pop`, `slice`, etc.
 
 ####Futher Development
 
