@@ -1,7 +1,7 @@
 JSON Trasnformation Language
 =====
 
-jsontl is a library inteded to allow tranformation of JSON data using a JSON-based transformation language.
+jsontl is a library inteded to allow tranformation of JSON data using a JSON-based transformation language.  For more information, see the [specification proposal](http://doubleprecisionsoftware.github.io/jsontl/).
 
 ##Format
 
