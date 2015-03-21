@@ -46,7 +46,7 @@ production.jsontl
 					"DefaultConnection": [{
 						"replace": {
 							"ConnectionString": {
-								"with" : 'Server=ProductionServer..."
+								"with" : 'Server=ProductionServer...'
 							}
 						}
 					}]
@@ -103,7 +103,7 @@ The syntax for JSONTL is designed to "read" naturally.
 			"Data": [{
 				"replace": {
 					"ConnectionString": {
-						"with" : 'Server=ProductionServer..."
+						"with" : 'Server=ProductionServer...'
 					}
 				}
 			}]
