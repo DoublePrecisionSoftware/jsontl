@@ -18,7 +18,7 @@ the `web.config` for configuration of web applications.  This as been replaced
 by a JSON formatted file, `config.json`.  This has many advantages, but
 also one distincive disadvantage: the elimination of `web.config` Transforms.
 ASP.NET has provided some flexibility in this area by providing overrides as
-defined in the `PATH`, but as the amount of configuration changes grows, this 
+environment variables, but as the amount of configuration changes grows, this 
 may quickly become an unmanageable task.  JSONTL provides a much more flexible
 option, and when applied correctly, can fully replace the whole of functionality
 provided by the previous `web.config` Transorm approach.
