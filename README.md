@@ -72,6 +72,29 @@ The `extend` operation recursively adds properties to an object.  It has one req
 }
 ```
 
+###push
+
+The `push` operation adds a value to a property, if that property's value is an `Array` type.
+
+```javascript
+{
+	"push": {
+		"some": "object"
+	}
+}
+```
+
 ####The `when` condition
 
 The `when` condition in JSONT transform operations contains an object with a set of key/value pairs that must *all* exist and match the values of that in the target object.
+
+##Changelog
+
+- 0.1.0
+	- Initial release.  Includes `replace` and `extend` operations
+- 0.1.1
+	- Major rewrite; no functional changes
+- 0.1.2
+	- Added `push` operation
+- 0.1.3 (planned)
+	- Add `pop`, as well as other `Array`-related operations
