@@ -1,53 +1,86 @@
-<!doctype html>
-<html>
+<!doctype html><html><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="chrome=1"><title>jsontl by DoublePrecisionSoftware</title><link rel="stylesheet" href="stylesheets/styles.css"><link rel="stylesheet" href="stylesheets/pygment_trac.css"><meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"><!--[if lt IE 9]> <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script> <![endif]--></head><body><div class="wrapper"><header><h1>jsontl</h1><p>Transform JSON with JSON</p><p class="view"><a href="https://github.com/DoublePrecisionSoftware/jsontl">View the Project on GitHub <small>DoublePrecisionSoftware/jsontl</small></a></p><ul><li><a href="https://github.com/DoublePrecisionSoftware/jsontl/zipball/master">Download <strong>ZIP File</strong></a></li><li><a href="https://github.com/DoublePrecisionSoftware/jsontl/tarball/master">Download <strong>TAR Ball</strong></a></li><li><a href="https://github.com/DoublePrecisionSoftware/jsontl">View On <strong>GitHub</strong></a></li></ul></header><section><h1 id="a-proposal-for-json-transforms">A Proposal for JSON Transforms</h1>
+<p>As JSON is quickly becoming the standard for both over-the-wire and flat file
+data, there has become a need for utilties for dealing with data of this type.</p>
+<p>Many tools have been created: countless JSON parsing libraries,
+<a href="http://goessner.net/articles/JsonPath/">JSONPath</a>, etc, but none so far have
+addressed the need for <em>transormation</em> of JSON data.</p>
+<p>Traditionally, XML has been the standard storage and transfer mechanism for
+complex data, and thus it was necessary for XSLT to become a standard language
+for transforming XML data into various permutaions for consumption outside its
+originating source.  Such a mechanism has yet to be created for JSON, a format
+that has been increasing in popularity in recent years.</p>
+<h2 id="a-test-case">A Test Case</h2>
+<p>One of the biggest changes to Microsoft&#39;s new ASP.NET 5 is the elimination of
+the <code>web.config</code> for configuration of web applications.  This as been replaced
+by a JSON formatted file, <code>config.json</code>.  This has many advantages, but
+also one distincive disadvantage: the elimination of <code>web.config</code> Transforms.
+ASP.NET has provided some flexibility in this area by providing overrides as
+defined in the <code>PATH</code>, but as the amount of configuration changes grows, this
+may quickly become an unmanageable task.  JSONTL provides a much more flexible
+option, and when applied correctly, can fully replace the whole of functionality
+provided by the previous <code>web.config</code> Transorm approach.</p>
+<h3 id="example">Example</h3>
+<p>config.json</p>
+<pre><code class="lang-json">{
+    &quot;Data&quot;: {
+        &quot;DefaultConnection&quot;: {
+            &quot;ConnectionString&quot;: &quot;Server=DevServer...&quot;
+        }
+    }
+}
+</code></pre>
+<p>production.jsontl</p>
+<pre><code class="lang-json">{
+    &quot;jsontl&quot;: {
+        &quot;transform&quot;: {
+            &quot;Data&quot;: [
+                {
+                    &quot;in&quot;: {
+                        &quot;DefaultConnection&quot;: {
+                            &quot;replace&quot;: {
+                                &quot;ConnectionString&quot;: {
+                                    &quot;with&quot; : &#39;Server=ProductionServier...&quot;
+                                }
+                            }
+                        }
+                    }
+                }
+            ]
+        }
+    }
+}
+</code></pre>
+<p>Startup.cs</p>
+<pre><code class="lang-cs">public Startup(IHostingEnvironment env) {
+    Configuration = new Configruation()
+        .AddJsonFile(string.Format(&quot;config.{0}.json&quot;, env.EnvironmentName));
+}
+</code></pre>
+<p>gruntfile.js</p>
+<pre><code class="lang-js">grunt.initConfig({
+    jsontl: {
+        staging: {
+            files: [{
+                expand: true,
+                src: [&#39;config.json],
+                ext: &#39;.Staging.json&#39;
+            }]
+            transform: &#39;staging.jsontl&#39;
+        },
+        production: {
+            files: [{
+                expand: true,
+                src: [&#39;config.json],
+                ext: &#39;.Production.json&#39;
+            }]
+            transform: &#39;production.jsontl&#39;
+        }
+    }
+});
 
-<head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="chrome=1">
-	<title>jsontl by DoublePrecisionSoftware</title>
-	<link rel="stylesheet" href="stylesheets/styles.css">
-	<link rel="stylesheet" href="stylesheets/pygment_trac.css">
-	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-	<!--[if lt IE 9]> <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script> <![endif]-->
-</head>
-
-<body>
-	<div class="wrapper">
-		<header>
-			<h1>jsontl</h1>
-			<p>Transform JSON with JSON</p>
-			<p class="view"><a href="https://github.com/DoublePrecisionSoftware/jsontl">View the Project on GitHub <small>DoublePrecisionSoftware/jsontl</small></a>
-			</p>
-			<ul>
-				<li><a href="https://github.com/DoublePrecisionSoftware/jsontl/zipball/master">Download <strong>ZIP File</strong></a>
-				</li>
-				<li><a href="https://github.com/DoublePrecisionSoftware/jsontl/tarball/master">Download <strong>TAR Ball</strong></a>
-				</li>
-				<li><a href="https://github.com/DoublePrecisionSoftware/jsontl">View On <strong>GitHub</strong></a>
-				</li>
-			</ul>
-		</header>
-		<section>
-			<h1 id="a-proposal-for-json-transforms">A Proposal for JSON Transforms</h1>
-		</section>
-		<footer>
-			<p>This project is maintained by <a href="https://github.com/DoublePrecisionSoftware">DoublePrecisionSoftware</a>
-			</p>
-			<p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small>
-			</p>
-		</footer>
-	</div>
-	<script src="javascripts/scale.fix.js"></script>
-	<script type="text/javascript">
-		var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-		document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
-	</script>
-	<script type="text/javascript">
-		try {
-			var pageTracker = _gat._getTracker("UA-46742736-2");
-			pageTracker._trackPageview();
-		} catch (err) {}
-	</script>
-</body>
-
-</html>
+grunt.laodNpmTasks(&quot;grunt-jsontl&quot;);
+</code></pre>
+<p>The example above, when wired with <code>grunt-watch</code> or IDE tooling, can now perform
+transforms automatically, in this case changing connection strings for the
+necessary environments with no effort post-deployment.</p>
+</section><footer><p>This project is maintained by <a href="https://github.com/DoublePrecisionSoftware">DoublePrecisionSoftware</a></p><p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p></footer></div><script src="javascripts/scale.fix.js"></script><script type="text/javascript">var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));</script><script type="text/javascript">try {var pageTracker = _gat._getTracker("UA-46742736-2");pageTracker._trackPageview();} catch (err) {}</script></body></html>
