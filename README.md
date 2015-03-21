@@ -12,7 +12,11 @@ The format for jsontl transforms (`.jsontl` files) is as follows:
 	"jsont": {
 		"version": "0.1",
 		"transform": {
-			// transform definition
+			"Property": [{
+				"operation": {
+					"param": "value"
+				}
+			}]
 		}
 	}
 }
