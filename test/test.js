@@ -28,4 +28,7 @@ describe('Transform', function () {
 	it('Sets all Customers obect\'s Addresses[0].Address1 to "321 Code Street"', function() {
 		assert.equal(data.Value, "Two");
 	});
+	it('Adds an address to Customers[0].Addresses', function() {
+		assert.equal(data.Customers[0].Addresses[2].Type, "Vacation");
+	});
 });

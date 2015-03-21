@@ -58,9 +58,23 @@
 				}
 			}
 
+			var push = function(node, trans, key) {
+				if (!node[key] instanceof Array){
+					throw TypeError('The push operation is only valid on Array types.');
+				}
+				if (!trans instanceof Array) {
+					throw TypeError('The "push" operator requires an Array value.');
+				}
+
+				trans.forEach(function(val) {
+					node[key].push(val);
+				});
+			};
+
 			return {
 				replace: replace,
-				extend: extend
+				extend: extend,
+				push: push
 			};
 		})();
 
@@ -94,7 +108,8 @@
 				return data;
 			}
 
-			return { in : _in
+			return {
+				in : _in
 			};
 		})();
 

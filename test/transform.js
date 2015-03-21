@@ -73,7 +73,15 @@ module.exports = {
 									"Type": "Work"
 								}
 							}
-						}
+						},
+						"push": [
+							{
+								"Type": "Vacation",
+								"Address1": "123 Bahamas Ave",
+								"City": "The",
+								"State": "Bahamas"
+							}
+						]
 	 				}
 				]
 			}
