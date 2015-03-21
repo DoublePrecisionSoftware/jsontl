@@ -33,19 +33,17 @@ provided by the previous <code>web.config</code> Transorm approach.</p>
 <pre><code class="lang-json">{
     &quot;jsontl&quot;: {
         &quot;transform&quot;: {
-            &quot;Data&quot;: [
-                {
-                    &quot;in&quot;: {
-                        &quot;DefaultConnection&quot;: [{
-                            &quot;replace&quot;: {
-                                &quot;ConnectionString&quot;: {
-                                    &quot;with&quot; : &#39;Server=ProductionServer...&quot;
-                                }
+            &quot;Data&quot;: [{
+                &quot;in&quot;: {
+                    &quot;DefaultConnection&quot;: [{
+                        &quot;replace&quot;: {
+                            &quot;ConnectionString&quot;: {
+                                &quot;with&quot; : &#39;Server=ProductionServer...&quot;
                             }
-                        }]
-                    }
+                        }
+                    }]
                 }
-            ]
+            }]
         }
     }
 }
@@ -79,4 +77,54 @@ grunt.laodNpmTasks(&quot;grunt-jsontl&quot;);
 <p>The example above, when wired with <code>grunt-watch</code> or IDE tooling, can now perform
 transforms automatically, in this case changing connection strings for the
 necessary environments with no effort post-deployment.</p>
+<h2 id="current-syntax">Current Syntax</h2>
+<p>The syntax for JSONTL is designed to &quot;read&quot; naturally.</p>
+<pre><code class="lang-json">{
+    &quot;jsontl&quot;: {
+        &quot;version&quot;, &quot;0.1&quot;,
+        &quot;transform&quot;: {
+            &quot;Data&quot;: [{
+                &quot;replace&quot;: {
+                    &quot;ConnectionString&quot;: {
+                        &quot;with&quot; : &#39;Server=ProductionServer...&quot;
+                    }
+                }
+            }]
+        }
+    }
+}
+</code></pre>
+<p>Reading JSONTL syntax begins with the word &quot;in,&quot; and continues with each word
+in the nested JSON syntax.  For example, the above transform will be read as:</p>
+<blockquote>
+<p>In Data, replace ConnectionString with &quot;Server=ProductionsServer...&quot;</p>
+</blockquote>
+<p>It can also be read as one would access the properties in JavaScript:</p>
+<pre><code class="lang-js">transform.Data.replace.ConnectionString.with
+</code></pre>
+<p>Since JSONTL files are actually JSON, the syntax is simple and familiar, with
+some notable exceptions.  All Operations and Locators (e.g., <code>in</code>, <code>replace</code>,
+<code>extend</code>, etc) are considered &quot;keywords&quot; and are reserved for use by the JSONTL
+engine.</p>
+<h3 id="transform-definitions">Transform Definitions</h3>
+<p>A transform definition consists of a name of a property as an object key, with
+an <code>Array</code> value containing a set of objects which can be any combination of
+Operations and/or Locators.</p>
+<h3 id="transform-locators">Transform Locators</h3>
+<p>Currently, the only Locator is <code>in</code>, which tells
+the JSONTL engine to look further into the object hierarcy, essentially further
+nesting the &quot;context&quot; of the transform operations.  This enables transformation
+of infinitely nested objects.</p>
+<h3 id="transform-operations">Transform Operations</h3>
+<p>JSONTL provides a few basic Operations to perform on data.  These include
+<code>replace</code>, which replaces scalar values with the value specified by the <code>with</code>
+parameter, and <code>extend</code>, which adds new key/value pairs to an object.</p>
+<h4 id="futher-development">Futher Development</h4>
+<p>As of the time of this writing, conditionals for transform operations only have
+access to the properties within the current transformation context.  I have
+considered implementing &quot;parent&quot; and &quot;root&quot; locators in order to allow for more
+flexible conditions, but have not yet pursued development in that area.</p>
+<p>The <code>version</code> property of the transform file is currently not used, but is
+recommended for future validation in case the API changes such that tranformation
+engines need to ensure compatability.</p>
 </section><footer><p>This project is maintained by <a href="https://github.com/DoublePrecisionSoftware">DoublePrecisionSoftware</a></p><p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p></footer></div><script src="javascripts/scale.fix.js"></script><script type="text/javascript">var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));</script><script type="text/javascript">try {var pageTracker = _gat._getTracker("UA-46742736-2");pageTracker._trackPageview();} catch (err) {}</script></body></html>

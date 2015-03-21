@@ -42,19 +42,17 @@ production.jsontl
 {
 	"jsontl": {
 		"transform": {
-			"Data": [
-				{
-					"in": {
-						"DefaultConnection": [{
-							"replace": {
-								"ConnectionString": {
-									"with" : 'Server=ProductionServer..."
-								}
+			"Data": [{
+				"in": {
+					"DefaultConnection": [{
+						"replace": {
+							"ConnectionString": {
+								"with" : 'Server=ProductionServer..."
 							}
-						}]
-					}
+						}
+					}]
 				}
-			]
+			}]
 		}
 	}
 }
@@ -93,3 +91,70 @@ grunt.laodNpmTasks("grunt-jsontl");
 The example above, when wired with `grunt-watch` or IDE tooling, can now perform
 transforms automatically, in this case changing connection strings for the
 necessary environments with no effort post-deployment.
+
+##Current Syntax
+
+The syntax for JSONTL is designed to "read" naturally.
+
+```json
+{
+	"jsontl": {
+		"version", "0.1",
+		"transform": {
+			"Data": [{
+				"replace": {
+					"ConnectionString": {
+						"with" : 'Server=ProductionServer..."
+					}
+				}
+			}]
+		}
+	}
+}
+```
+
+Reading JSONTL syntax begins with the word "in," and continues with each word
+in the nested JSON syntax.  For example, the above transform will be read as:
+
+> In Data, replace ConnectionString with "Server=ProductionsServer..."
+
+It can also be read as one would access the properties in JavaScript:
+
+```js
+transform.Data.replace.ConnectionString.with
+```
+
+Since JSONTL files are actually JSON, the syntax is simple and familiar, with
+some notable exceptions.  All Operations and Locators (e.g., `in`, `replace`, 
+`extend`, etc) are considered "keywords" and are reserved for use by the JSONTL
+engine.
+
+###Transform Definitions
+
+A transform definition consists of a name of a property as an object key, with
+an `Array` value containing a set of objects which can be any combination of
+Operations and/or Locators.
+
+###Transform Locators
+
+Currently, the only Locator is `in`, which tells 
+the JSONTL engine to look further into the object hierarcy, essentially further
+nesting the "context" of the transform operations.  This enables transformation
+of infinitely nested objects.
+
+###Transform Operations
+
+JSONTL provides a few basic Operations to perform on data.  These include 
+`replace`, which replaces scalar values with the value specified by the `with`
+parameter, and `extend`, which adds new key/value pairs to an object.
+
+####Futher Development
+
+As of the time of this writing, conditionals for transform operations only have
+access to the properties within the current transformation context.  I have
+considered implementing "parent" and "root" locators in order to allow for more
+flexible conditions, but have not yet pursued development in that area.
+
+The `version` property of the transform file is currently not used, but is
+recommended for future validation in case the API changes such that tranformation
+engines need to ensure compatability.
