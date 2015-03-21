@@ -45,13 +45,13 @@ production.jsontl
 			"Data": [
 				{
 					"in": {
-						"DefaultConnection": {
+						"DefaultConnection": [{
 							"replace": {
 								"ConnectionString": {
-									"with" : 'Server=ProductionServier..."
+									"with" : 'Server=ProductionServer..."
 								}
 							}
-						}
+						}]
 					}
 				}
 			]
@@ -73,19 +73,15 @@ gruntfile.js
 grunt.initConfig({
 	jsontl: {
 		staging: {
-			files: [{
-				expand: true,
-				src: ['config.json],
-				ext: '.Staging.json'
-			}]
+			files: {
+				'config.Staging.json' : ['config.json']
+			}
 			transform: 'staging.jsontl'	
 		},
 		production: {
-			files: [{
-				expand: true,
-				src: ['config.json],
-				ext: '.Production.json'
-			}]
+			files: {
+				'config.Production.json' : ['config.json']
+			}
 			transform: 'production.jsontl'	
 		}
 	}

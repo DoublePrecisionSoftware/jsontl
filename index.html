@@ -36,13 +36,13 @@ provided by the previous <code>web.config</code> Transorm approach.</p>
             &quot;Data&quot;: [
                 {
                     &quot;in&quot;: {
-                        &quot;DefaultConnection&quot;: {
+                        &quot;DefaultConnection&quot;: [{
                             &quot;replace&quot;: {
                                 &quot;ConnectionString&quot;: {
-                                    &quot;with&quot; : &#39;Server=ProductionServier...&quot;
+                                    &quot;with&quot; : &#39;Server=ProductionServer...&quot;
                                 }
                             }
-                        }
+                        }]
                     }
                 }
             ]
@@ -60,19 +60,15 @@ provided by the previous <code>web.config</code> Transorm approach.</p>
 <pre><code class="lang-js">grunt.initConfig({
     jsontl: {
         staging: {
-            files: [{
-                expand: true,
-                src: [&#39;config.json],
-                ext: &#39;.Staging.json&#39;
-            }]
+            files: {
+                &#39;config.Staging.json&#39; : [&#39;config.json&#39;]
+            }
             transform: &#39;staging.jsontl&#39;
         },
         production: {
-            files: [{
-                expand: true,
-                src: [&#39;config.json],
-                ext: &#39;.Production.json&#39;
-            }]
+            files: {
+                &#39;config.Production.json&#39; : [&#39;config.json&#39;]
+            }
             transform: &#39;production.jsontl&#39;
         }
     }
