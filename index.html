@@ -1,0 +1,122 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>jsontl by DoublePrecisionSoftware</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>jsontl</h1>
+        <p>Transform JSON with JSON</p>
+
+        <p class="view"><a href="https://github.com/DoublePrecisionSoftware/jsontl">View the Project on GitHub <small>DoublePrecisionSoftware/jsontl</small></a></p>
+
+
+        <ul>
+          <li><a href="https://github.com/DoublePrecisionSoftware/jsontl/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/DoublePrecisionSoftware/jsontl/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/DoublePrecisionSoftware/jsontl">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h1>
+<a id="json-trasnformation-language" class="anchor" href="#json-trasnformation-language" aria-hidden="true"><span class="octicon octicon-link"></span></a>JSON Trasnformation Language</h1>
+
+<p>jsontl is a library inteded to allow tranformation of JSON data using a JSON-based transformation language.</p>
+
+<h2>
+<a id="format" class="anchor" href="#format" aria-hidden="true"><span class="octicon octicon-link"></span></a>Format</h2>
+
+<p>The format for jsontl transforms (<code>.jsontl</code> files) is as follows:</p>
+
+<div class="highlight highlight-json"><pre>{
+    <span class="pl-s"><span class="pl-pds">"</span>jsont<span class="pl-pds">"</span></span>: {
+        <span class="pl-s"><span class="pl-pds">"</span>version<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>0.1<span class="pl-pds">"</span></span>,
+        <span class="pl-s"><span class="pl-pds">"</span>transform<span class="pl-pds">"</span></span>: {
+            <span class="pl-ii">//</span> <span class="pl-ii">transform</span> <span class="pl-ii">definition</span>
+    }
+}</pre></div>
+
+<h2>
+<a id="transform-definitions" class="anchor" href="#transform-definitions" aria-hidden="true"><span class="octicon octicon-link"></span></a>Transform Definitions</h2>
+
+<p>JSONT transform definitions are defined by a JavaScript object containing, at a minimum, the name of a property of the object to transform, and an array of one or more Transform Operations to perform on that data.</p>
+
+<h3>
+<a id="example" class="anchor" href="#example" aria-hidden="true"><span class="octicon octicon-link"></span></a>Example</h3>
+
+<div class="highlight highlight-javascript"><pre>{
+    <span class="pl-s"><span class="pl-pds">"</span>Value<span class="pl-pds">"</span></span><span class="pl-k">:</span> [
+        <span class="pl-s"><span class="pl-pds">"</span>replace<span class="pl-pds">"</span></span><span class="pl-k">:</span> {
+            <span class="pl-s"><span class="pl-pds">"</span>with<span class="pl-pds">"</span></span><span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span>Two<span class="pl-pds">"</span></span>
+        }
+    ]
+}</pre></div>
+
+<h2>
+<a id="transformation-operations" class="anchor" href="#transformation-operations" aria-hidden="true"><span class="octicon octicon-link"></span></a>Transformation Operations</h2>
+
+<p>So far, JSONT provides two basic transform operations:  <code>replace</code>, and <code>expand</code>.</p>
+
+<h3>
+<a id="replace" class="anchor" href="#replace" aria-hidden="true"><span class="octicon octicon-link"></span></a>replace</h3>
+
+<p>The <code>replace</code> operation replaces one value with another. It has one required and one optional argument.</p>
+
+<div class="highlight highlight-javascript"><pre>{
+    <span class="pl-s"><span class="pl-pds">"</span>replace<span class="pl-pds">"</span></span><span class="pl-k">:</span> {
+    <span class="pl-s"><span class="pl-pds">"</span>FirstName<span class="pl-pds">"</span></span><span class="pl-k">:</span> {
+        <span class="pl-s"><span class="pl-pds">"</span>with<span class="pl-pds">"</span></span><span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span>Bob<span class="pl-pds">"</span></span>,              <span class="pl-c">// `with` value is required</span>
+        <span class="pl-s"><span class="pl-pds">"</span>when<span class="pl-pds">"</span></span><span class="pl-k">:</span> {                   <span class="pl-c">// conditional `when` is optional</span>
+            <span class="pl-s"><span class="pl-pds">"</span>LastName<span class="pl-pds">"</span></span><span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span>Smith<span class="pl-pds">"</span></span>
+        }
+    }
+}</pre></div>
+
+<h3>
+<a id="extend" class="anchor" href="#extend" aria-hidden="true"><span class="octicon octicon-link"></span></a>extend</h3>
+
+<p>The <code>extend</code> operation recursively adds properties to an object.  It has one required and one optional argument.</p>
+
+<div class="highlight highlight-javascript"><pre>{
+    <span class="pl-s"><span class="pl-pds">"</span>extend<span class="pl-pds">"</span></span><span class="pl-k">:</span> {
+        <span class="pl-s"><span class="pl-pds">"</span>MiddleInitial<span class="pl-pds">"</span></span><span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span>X<span class="pl-pds">"</span></span>,       <span class="pl-c">// must provide at least one key/value pair to add</span>
+        <span class="pl-s"><span class="pl-pds">"</span>when<span class="pl-pds">"</span></span> <span class="pl-k">:</span> {                  <span class="pl-c">// may optionally provide a `when` condition</span>
+            <span class="pl-s"><span class="pl-pds">"</span>FirstName<span class="pl-pds">"</span></span> <span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">"</span>Bob<span class="pl-pds">"</span></span>
+        }
+    }
+}</pre></div>
+
+<h4>
+<a id="the-when-condition" class="anchor" href="#the-when-condition" aria-hidden="true"><span class="octicon octicon-link"></span></a>The <code>when</code> condition</h4>
+
+<p>The <code>when</code> condition in JSONT transform operations contains an object with a set of key/value pairs that must <em>all</em> exist and match the values of that in the target object.</p>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/DoublePrecisionSoftware">DoublePrecisionSoftware</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+              <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-46742736-2");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
+  </body>
+</html>
