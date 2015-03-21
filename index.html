@@ -75,13 +75,13 @@
         staging: {
             files: {
                 &#39;config.Staging.json&#39; : [&#39;config.json&#39;]
-            }
+            },
             transform: &#39;staging.jsontl&#39;
         },
         production: {
             files: {
                 &#39;config.Production.json&#39; : [&#39;config.json&#39;]
-            }
+            },
             transform: &#39;production.jsontl&#39;
         }
     }
@@ -111,7 +111,8 @@ grunt.laodNpmTasks(&quot;grunt-jsontl&quot;);
 			<blockquote>
 				<p>In Data, replace ConnectionString with &quot;Server=ProductionsServer...&quot;</p>
 			</blockquote>
-			<p>It can also be read as one would access the properties in JavaScript:</p>
+			<p>It can also be read similar to the way one would access the properties in JavaScript:
+			</p>
 			<pre><code class="lang-js">transform.Data.replace.ConnectionString.with
 </code></pre>
 			<p>Since JSONTL files are actually JSON, the syntax is simple and familiar, with some notable exceptions. All Operations and Locators (e.g., <code>in</code>, <code>replace</code>,

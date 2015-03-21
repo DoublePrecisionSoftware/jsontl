@@ -72,13 +72,13 @@ grunt.initConfig({
 		staging: {
 			files: {
 				'config.Staging.json' : ['config.json']
-			}
+			},
 			transform: 'staging.jsontl'	
 		},
 		production: {
 			files: {
 				'config.Production.json' : ['config.json']
-			}
+			},
 			transform: 'production.jsontl'	
 		}
 	}
@@ -117,7 +117,8 @@ in the nested JSON syntax.  For example, the above transform will be read as:
 
 > In Data, replace ConnectionString with "Server=ProductionsServer..."
 
-It can also be read as one would access the properties in JavaScript:
+It can also be read similar to the way one would access the properties in
+JavaScript:
 
 ```js
 transform.Data.replace.ConnectionString.with
