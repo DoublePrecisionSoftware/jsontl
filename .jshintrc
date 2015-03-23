@@ -1,5 +1,5 @@
 {
-	"browser": true,
+	"node": true,
 	"devel": true,
 	"debug": true,
 	"plusplus": false,
