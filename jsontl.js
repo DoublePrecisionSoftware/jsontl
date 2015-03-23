@@ -80,11 +80,11 @@
 
 		var _in = function (data, transform) {
 			// look at the transform object for member to transform
-			for (var definition in transform) {
+			Object.keys(transform).forEach(function(definition) {
 				// each tranform definition contains an array of transform instruction objects
 				transform[definition].forEach(function (def) {
 					// perform each of the transform operations defined in `def`
-					for (var op in def) {
+					Object.keys(def).forEach(function(op) {
 						// ensure the operation or locator exists
 						if (transforms[op]) {
 							// perform the transform
@@ -100,9 +100,9 @@
 							return locators[op](data[definition], def[op]);
 						}
 						// otherwise, move on
-					}
+					});
 				});
-			}
+			});
 			return data;
 		};
 
