@@ -2,46 +2,114 @@
 	'use strict';
 
 	var util = {
-		getTransDescription: function(trans) {
+		getTransDescription: function (trans) {
 			return JSON.stringify(trans);
 		}
 	};
 
 	var transforms = (function () {
 
-		function getMatch(node, trans) {
-			function nodeMatch(e) {
-				return node[e] === match[e];
-			}
+		var conditions = (function () {
 
-			for (var prop in trans) {
-				var newVal = trans[prop].with;
-				var match = trans[prop].when;
-				if (node.hasOwnProperty(prop)) {
-					if (typeof match === 'object') {
-						var matched = Object.keys(match).every(nodeMatch);
-						if (matched) {
-							node[prop] = newVal;
+			var _if = function (node, cond) {
+				for (var prop in node) {
+					if (cond.hasOwnProperty(prop)){
+						if (cond[prop] === node[prop]){
+							return true;
 						}
-					} else if (!match || (node[prop] == match)) {
-						node[prop] = newVal;
 					}
 				}
-			}
-		}
+				return false;
+			};
+
+			var _when = function (node, cond) {
+				for (var prop in cond) {
+					if (node.hasOwnProperty(prop)){
+						if (cond[prop] !== node[prop]){
+							return false;
+						}
+					}
+				}
+				return true;
+			};
+
+			return {
+				"if": _if,
+				"when": _when
+			};
+		})();
 
 		function replace(node, trans, key) {
 			if (node[key] instanceof Array) {
-				var i = -1,
-					len = node[key].length;
-				while (++i < len) {
-					getMatch(node[key][i], trans);
-				}
+				node[key].forEach(function(item, i) {
+					Object.keys(item).forEach(function(prop) {
+						if (!trans.hasOwnProperty(prop)){
+							return;
+						}
+
+				console.log("transforming " + key +"[" + i + "]." + prop) ;
+
+						if (!trans[prop].hasOwnProperty("with")){
+							throw new SyntaxError('The "replace" operation requires a "with" value. Transform: ' + util.getTransDescription(trans[prop]));
+						}
+
+						if (trans[prop].hasOwnProperty("if") && trans[prop].hasOwnProperty("when")){
+							throw new SyntaxError('Cannot combine "when" and "if" conditions. Transform: ' + util.getTransDescription(trans[prop]));
+						}
+
+						var replace = true;
+						if (trans[prop].hasOwnProperty("when")){
+							console.log(item);
+							replace = conditions.when(item, trans[prop].when);
+						}
+
+						if (trans[prop].hasOwnProperty("if")){
+							replace = conditions.if(item, trans[prop].if);
+						}
+
+						if (replace) {
+							console.log("replacing " + key +"[" + i + "]." + prop + ' with "' + trans[prop].with + '"') ;
+							node[key][i][prop] = trans[prop].with;
+						}
+					});
+				});
 			} else if (typeof node[key] === 'object') {
-				getMatch(node[key], trans);
+
+				Object.keys(node[key]).forEach(function(prop) {
+					if (!trans.hasOwnProperty(prop)){
+						return;
+					}
+
+					if (!trans[prop].hasOwnProperty("with")){
+						throw new SyntaxError('The "replace" operation requires a "with" value. Transform: ' + util.getTransDescription(trans[prop]));
+					}
+
+					if (trans[prop].hasOwnProperty("if") && trans[prop].hasOwnProperty("when")){
+						throw new SyntaxError('Cannot combine "when" and "if" conditions. Transform: ' + util.getTransDescription(trans[prop]));
+					}
+
+					var replace = true;
+					if (trans[prop].hasOwnProperty("when")){
+						replace = conditions.when(node[key], trans[prop].when);
+					}
+
+					if (trans[prop].hasOwnProperty("if")){
+						replace = conditions.if(node[key], trans[prop].if);
+					}
+
+					if (replace) {
+						node[key][prop] = trans[prop].with;
+					}
+				});
+
 			} else {
+				// data is scalar
+				if (!trans.hasOwnProperty("with")){
+					throw new SyntaxError('The "replace" operation requires a "with" value. Transform: ' + util.getTransDescription(trans));
+				}
+
 				var newVal = trans.with;
-				var match = trans.when;
+				var match = trans.when || trans.if;
 				if (!match || (node[key] == match)) {
 					node[key] = newVal;
 				}
@@ -51,11 +119,12 @@
 		// add the specified data to the object provided
 		var extend = function (data, trans, key) {
 			if (typeof data[key] !== "object") {
-				throw new SyntaxError('Cannot extend a scalar value.  Transform: ' + util.getTransDescription(trans));
+				throw new SyntaxError('Cannot extend a scalar value.  Transform: ' + util.getTransDescription(trans) + ' Data: ' + JSON.stringify(data));
+
 			}
 
 			for (var prop in trans) {
-				if (typeof trans[prop] === "object") {
+				if (typeof data[prop] === "object") {
 					return extend(data[key], trans[prop], prop);
 				}
 				data[key][prop] = trans[prop];
