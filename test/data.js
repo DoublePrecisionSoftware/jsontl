@@ -5,10 +5,10 @@ module.exports = {
 		"LastName": "Smith"
 	},
 	"System": {
+		"Name": "MySystem",
 		"Meta": {
 			"OS": "OSX"
-		},
-		"Name": "MySystem"
+		}
 	},
 	"Customers": [
 		{
