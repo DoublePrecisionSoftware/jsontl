@@ -84,9 +84,11 @@ The `push` operation adds a value to a property, if that property's value is an 
 }
 ```
 
-####The `when` condition
+####Conditional Operations
 
-The `when` condition in JSONT transform operations contains an object with a set of key/value pairs that must *all* exist and match the values of that in the target object.
+The `when` condition in JSONT transform operations defines an object with a set of key/value pairs that must *all* and match the values of that in the target object.
+
+The `if` condition is similar to the `when` condition, but performs an `OR` operation.  If *any* values provided match that of the data, the operation is excuted.
 
 ##Changelog
 
@@ -96,5 +98,10 @@ The `when` condition in JSONT transform operations contains an object with a set
 	- Major rewrite; no functional changes
 - 0.1.2
 	- Added `push` operation
-- 0.1.3 (planned)
-	- Add `pop`, as well as other `Array`-related operations
+- 0.1.3
+	- Added `if` condition
+	
+##Planned Improvements
+- Add `pop` operation, as well as other `Array`-related operations
+- Add extensiblity points (custom operations, conditions, etc.)
+- General code clean-up, extensive comments
