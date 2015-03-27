@@ -13,8 +13,8 @@
 
 			var _if = function (node, cond) {
 				for (var prop in node) {
-					if (cond.hasOwnProperty(prop)){
-						if (cond[prop] === node[prop]){
+					if (cond.hasOwnProperty(prop)) {
+						if (cond[prop] === node[prop]) {
 							return true;
 						}
 					}
@@ -24,8 +24,8 @@
 
 			var _when = function (node, cond) {
 				for (var prop in cond) {
-					if (node.hasOwnProperty(prop)){
-						if (cond[prop] !== node[prop]){
+					if (node.hasOwnProperty(prop)) {
+						if (cond[prop] !== node[prop]) {
 							return false;
 						}
 					}
@@ -41,59 +41,56 @@
 
 		function replace(node, trans, key) {
 			if (node[key] instanceof Array) {
-				node[key].forEach(function(item, i) {
-					Object.keys(item).forEach(function(prop) {
-						if (!trans.hasOwnProperty(prop)){
+				node[key].forEach(function (item, i) {
+					Object.keys(item).forEach(function (prop) {
+
+						if (!trans.hasOwnProperty(prop)) {
 							return;
 						}
 
-				console.log("transforming " + key +"[" + i + "]." + prop) ;
-
-						if (!trans[prop].hasOwnProperty("with")){
+						if (!trans[prop].hasOwnProperty("with")) {
 							throw new SyntaxError('The "replace" operation requires a "with" value. Transform: ' + util.getTransDescription(trans[prop]));
 						}
 
-						if (trans[prop].hasOwnProperty("if") && trans[prop].hasOwnProperty("when")){
+						if (trans[prop].hasOwnProperty("if") && trans[prop].hasOwnProperty("when")) {
 							throw new SyntaxError('Cannot combine "when" and "if" conditions. Transform: ' + util.getTransDescription(trans[prop]));
 						}
 
 						var replace = true;
-						if (trans[prop].hasOwnProperty("when")){
-							console.log(item);
+						if (trans[prop].hasOwnProperty("when")) {
 							replace = conditions.when(item, trans[prop].when);
 						}
 
-						if (trans[prop].hasOwnProperty("if")){
+						if (trans[prop].hasOwnProperty("if")) {
 							replace = conditions.if(item, trans[prop].if);
 						}
 
 						if (replace) {
-							console.log("replacing " + key +"[" + i + "]." + prop + ' with "' + trans[prop].with + '"') ;
 							node[key][i][prop] = trans[prop].with;
 						}
 					});
 				});
 			} else if (typeof node[key] === 'object') {
 
-				Object.keys(node[key]).forEach(function(prop) {
-					if (!trans.hasOwnProperty(prop)){
+				Object.keys(node[key]).forEach(function (prop) {
+					if (!trans.hasOwnProperty(prop)) {
 						return;
 					}
 
-					if (!trans[prop].hasOwnProperty("with")){
+					if (!trans[prop].hasOwnProperty("with")) {
 						throw new SyntaxError('The "replace" operation requires a "with" value. Transform: ' + util.getTransDescription(trans[prop]));
 					}
 
-					if (trans[prop].hasOwnProperty("if") && trans[prop].hasOwnProperty("when")){
+					if (trans[prop].hasOwnProperty("if") && trans[prop].hasOwnProperty("when")) {
 						throw new SyntaxError('Cannot combine "when" and "if" conditions. Transform: ' + util.getTransDescription(trans[prop]));
 					}
 
 					var replace = true;
-					if (trans[prop].hasOwnProperty("when")){
+					if (trans[prop].hasOwnProperty("when")) {
 						replace = conditions.when(node[key], trans[prop].when);
 					}
 
-					if (trans[prop].hasOwnProperty("if")){
+					if (trans[prop].hasOwnProperty("if")) {
 						replace = conditions.if(node[key], trans[prop].if);
 					}
 
@@ -104,7 +101,7 @@
 
 			} else {
 				// data is scalar
-				if (!trans.hasOwnProperty("with")){
+				if (!trans.hasOwnProperty("with")) {
 					throw new SyntaxError('The "replace" operation requires a "with" value. Transform: ' + util.getTransDescription(trans));
 				}
 
@@ -155,14 +152,14 @@
 
 		var _in = function (data, transform) {
 			// look at the transform object for member to transform
-			Object.keys(transform).forEach(function(definition) {
+			Object.keys(transform).forEach(function (definition) {
 				// each tranform definition contains an array of transform instruction objects
 				if (!(transform[definition] instanceof Array)) {
 					throw new SyntaxError('Transform definitions should be Arrays.  Transform: ' + util.getTransDescription(transform[definition]));
 				}
 				transform[definition].forEach(function (def) {
 					// perform each of the transform operations defined in `def`
-					Object.keys(def).forEach(function(op) {
+					Object.keys(def).forEach(function (op) {
 						// ensure the operation or locator exists
 						if (transforms[op]) {
 							// perform the transform
@@ -184,8 +181,7 @@
 			return data;
 		};
 
-		return {
-			in : _in
+		return { in : _in
 		};
 	})();
 
