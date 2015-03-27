@@ -26,6 +26,9 @@ describe('Transform', function () {
 	it('Adds System.Meta.User and sets it to "Bob"', function() {
 		assert.equal(data.System.Meta.User, "Bob");
 	});
+	it('Sets Customer[0]\'s Name to "Jerry"', function() {
+		assert.equal(data.Customers[0].Name, "Jerry");
+	});
 	it('Sets all Customers obect\'s Addresses[0].Address1 to "321 Code Street"', function() {
 		assert.equal(data.Customers[0].Addresses[0].Address1, "321 Code Street");
 		assert.equal(data.Customers[1].Addresses[0].Address1, "321 Code Street");
