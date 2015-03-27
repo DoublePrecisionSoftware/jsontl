@@ -1,6 +1,12 @@
 (function () {
 	'use strict';
 
+	var util = {
+		getTransDescription: function(trans) {
+			return JSON.stringify(trans);
+		}
+	};
+
 	var transforms = (function () {
 
 		function getMatch(node, trans) {
@@ -45,7 +51,7 @@
 		// add the specified data to the object provided
 		var extend = function (data, trans, key) {
 			if (typeof data[key] !== "object") {
-				throw new TypeError("Cannot extend a scalar value.");
+				throw new SyntaxError('Cannot extend a scalar value.  Transform: ' + util.getTransDescription(trans));
 			}
 
 			for (var prop in trans) {
@@ -58,10 +64,10 @@
 
 		var push = function (node, trans, key) {
 			if (!node[key] instanceof Array) {
-				throw new TypeError('The push operation is only valid on Array types.');
+				throw new SyntaxError('The push operation is only valid on Array types.  Transform: ' + util.getTransDescription(trans));
 			}
 			if (!trans instanceof Array) {
-				throw new TypeError('The "push" operator requires an Array value.');
+				throw new SyntaxError('The "push" operator requires an Array value.  Transform: ' + util.getTransDescription(trans));
 			}
 
 			trans.forEach(function (val) {
@@ -82,6 +88,9 @@
 			// look at the transform object for member to transform
 			Object.keys(transform).forEach(function(definition) {
 				// each tranform definition contains an array of transform instruction objects
+				if (!(transform[definition] instanceof Array)) {
+					throw new SyntaxError('Transform definitions should be Arrays.  Transform: ' + util.getTransDescription(transform[definition]));
+				}
 				transform[definition].forEach(function (def) {
 					// perform each of the transform operations defined in `def`
 					Object.keys(def).forEach(function(op) {

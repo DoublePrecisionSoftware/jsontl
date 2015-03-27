@@ -14,17 +14,17 @@ module.exports = {
 				"replace": {
 					"FirstName": {
 						"with": "Bob",
-							"when": {
-								"LastName": "Smith"
-							}
-						},
-						"LastName": {
-							"with": "Jones"
+						"when": {
+							"LastName": "Smith"
 						}
 					},
-					"extend": {
-						"MiddleInitial": "X"
+					"LastName": {
+						"with": "Jones"
 					}
+				},
+				"extend": {
+					"MiddleInitial": "X"
+				}
     	}
    	],
 		"System": [
