@@ -9,7 +9,7 @@ The format for jsontl transforms (`.jsontl` files) is as follows:
 
 ```json
 {
-	"jsont": {
+	"jsontl": {
 		"version": "0.1",
 		"transform": {
 			"Property": [{
