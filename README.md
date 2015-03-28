@@ -39,7 +39,7 @@ JSONT transform definitions are defined by a JavaScript object containing, at a 
 
 ##Transformation Operations
 
-So far, JSONT provides two basic transform operations:  `replace`, and `expand`.
+So far, JSONT provides two basic transform operations:  `replace`, and `extend`.
 
 ###replace
 
