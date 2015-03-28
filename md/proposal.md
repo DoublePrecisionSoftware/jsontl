@@ -175,7 +175,7 @@ This syntax tells the transformation engine to only perform the tranform operati
 when the `Person` object being processed matches the criteria specified.  (e.g., 
 the object has a `LastName` and `MiddleInitial` property that match the specified
 values.)  The `if` keyword is similar, but checks if *any* of the criteria are met,
-rather than *all* (`when` is and `AND`, `if` is an `OR`).
+rather than *all* (`when` is an `AND`, `if` is an `OR`).
 
 ####Pending Improvements
 I've considered further extending the syntax of conditional operations for
@@ -202,7 +202,7 @@ Currently the transform process is destructive (that is, the data passed to the
 transform operation is modified during the trandformation process).  Efforts to
 perform a non-destructive transform have been considered, but not yet implemented.
 
-####Futher Development
+##Futher Development
 
 As of the time of this writing, conditionals for transform operations only have
 access to the properties within the current transformation context.  I have
