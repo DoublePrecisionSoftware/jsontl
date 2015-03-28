@@ -3,8 +3,9 @@
 As JSON is quickly becoming the standard for both over-the-wire and flat file
 data, there has become a need for utilties for dealing with data of this type.
 
-Many tools have been created: countless JSON parsing libraries, JSONPath, etc, 
-but none so far have addressed the need for *transormation* of JSON data.
+Many tools have been created: countless JSON parsing libraries, JSONPath,
+JSONPatch, etc, but none so far have addressed the need for a fully featured
+transormation language for JSON data.
 
 Traditionally, XML has been the standard storage and transfer mechanism for
 complex data, and thus it was necessary for XSLT to become a standard language
@@ -150,6 +151,56 @@ parameter, and `extend`, which adds new key/value pairs to an object.
 
 Many further Operations are planned, specifically around transforms pertaining 
 to `Array` types, such as `push`, `pop`, `slice`, etc.
+
+###Conditional Operations
+
+JSONTL also provides conditional logic for transform operations through the `when`
+and `if` keywords.
+
+```json
+"Person": [{
+	"replace": {
+		"FirstName": {
+			"with": "Bob",
+			"when": {
+				"LastName": "Smith"
+				"MiddleInitial": "X"
+			}
+		}
+	}
+}]
+```
+
+This syntax tells the transformation engine to only perform the tranform operation
+when the `Person` object being processed matches the criteria specified.  (e.g., 
+the object has a `LastName` and `MiddleInitial` property that match the specified
+values.)  The `if` keyword is similar, but checks if *any* of the criteria are met,
+rather than *all* (`when` is and `AND`, `if` is an `OR`).
+
+####Pending Improvements
+I've considered further extending the syntax of conditional operations for
+more granular control.
+
+```json
+"replace": {
+	"MaxItems": {
+		"with": 8,
+		"when": {
+			"CurrentItems": {
+				"gt": 4
+			}
+		}
+	}
+}
+```
+
+This syntax provides much more control, but can also get quite complex quite
+quickly.
+
+###Destructive Transform
+Currently the transform process is destructive (that is, the data passed to the 
+transform operation is modified during the trandformation process).  Efforts to
+perform a non-destructive transform have been considered, but not yet implemented.
 
 ####Futher Development
 
