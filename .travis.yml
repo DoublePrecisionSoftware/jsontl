@@ -5,4 +5,4 @@ before_install:
   - currentfolder=${PWD##*/}
   - if [ "$currentfolder" != 'jsontl' ]; then cd .. && eval "mv $currentfolder jsontl" && cd jsontl; fi
 before_script:
-	- node node_modules/.bin/mocha
+  - node node_modules/.bin/mocha
