@@ -20,5 +20,8 @@
   "bugs": {
     "url": "https://github.com/DoublePrecisionSoftware/jsontl/issues"
   },
-  "homepage": "https://github.com/DoublePrecisionSoftware/jsontl"
+  "homepage": "https://github.com/DoublePrecisionSoftware/jsontl",
+	"devDependencies": {
+		"mocha": "^2.2.1"
+	}
 }
