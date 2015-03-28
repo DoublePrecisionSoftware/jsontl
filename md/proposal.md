@@ -5,7 +5,7 @@ data, there has become a need for utilties for dealing with data of this type.
 
 Many tools have been created: countless JSON parsing libraries, JSONPath,
 JSONPatch, etc, but none so far have addressed the need for a fully featured
-transormation language for JSON data.
+transformation language for JSON data.
 
 Traditionally, XML has been the standard storage and transfer mechanism for
 complex data, and thus it was necessary for XSLT to become a standard language
@@ -118,17 +118,10 @@ in the nested JSON syntax.  For example, the above transform will be read as:
 
 > In Data, replace ConnectionString with "Server=ProductionsServer..."
 
-It can also be read similar to the way one would access the properties in
-JavaScript:
-
-```js
-transform.Data.replace.ConnectionString.with
-```
-
 Since JSONTL files are actually JSON, the syntax is simple and familiar, with
-some notable exceptions.  All Operations and Locators (e.g., `in`, `replace`, 
-`extend`, etc) are considered "keywords" and are reserved for use by the JSONTL
-engine.
+some notable exceptions.  Operations, Locators, and certain other words (e.g., 
+`in`, `replace`, `extend`, `when`, etc) are considered "keywords" and are reserved
+for use by the JSONTL engine.
 
 ###Transform Definitions
 
