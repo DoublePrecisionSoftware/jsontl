@@ -7,6 +7,9 @@
     "type": "git",
     "url": "https://github.com/DoublePrecisionSoftware/jsontl.git"
   },
+	"scripts": {
+		"test": "mocha test/test.js"
+	},
   "keywords": [
     "json",
     "transform",
