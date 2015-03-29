@@ -14,6 +14,7 @@ module.exports = {
 		{
 			"Id": 1,
 			"Name": "Bob",
+      "Type": "VIP",
 			"Addresses": [
 				{
 					"Type": "Work",
