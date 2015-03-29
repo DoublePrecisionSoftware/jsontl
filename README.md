@@ -1,7 +1,7 @@
 JSON Transformation Language
 =====
 
-jsontl is a library inteded to allow tranformation of JSON data using a JSON-based transformation language.  For more information, see the [specification proposal](http://doubleprecisionsoftware.github.io/jsontl/).
+jsontl is a library inteded to allow transformation of JSON data using a JSON-based transformation language.  For more information, see the [specification proposal](http://doubleprecisionsoftware.github.io/jsontl/).
 
 [![Build Status](https://travis-ci.org/DoublePrecisionSoftware/jsontl.svg)](https://travis-ci.org/DoublePrecisionSoftware/jsontl)
 
@@ -106,4 +106,5 @@ The `if` condition is similar to the `when` condition, but performs an `OR` oper
 ##Planned Improvements
 - Add `pop` operation, as well as other `Array`-related operations
 - Add extensiblity points (custom operations, conditions, etc.)
+- Add more granular conditions (`gt`, `lt`, etc.)
 - General code clean-up, extensive comments
