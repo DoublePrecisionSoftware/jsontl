@@ -4,6 +4,7 @@ JSON Transformation Language
 jsontl is a library inteded to allow transformation of JSON data using a JSON-based transformation language.  For more information, see the [specification proposal](http://doubleprecisionsoftware.github.io/jsontl/).
 
 [![Build Status](https://travis-ci.org/DoublePrecisionSoftware/jsontl.svg)](https://travis-ci.org/DoublePrecisionSoftware/jsontl)
+[![npm version](https://badge.fury.io/js/jsontl.svg)](http://badge.fury.io/js/jsontl)
 
 ##Format
 
