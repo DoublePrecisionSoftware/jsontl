@@ -1,4 +1,5 @@
 test/
 .jshintrc
-LICENSE
-.DS_Store
+**/*.DS_Store
+.travis.yml
+gruntfile.js
